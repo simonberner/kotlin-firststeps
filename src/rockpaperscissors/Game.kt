@@ -1,26 +1,37 @@
 package rockpaperscissors
 
-import java.awt.Choice
-
-val pleaseChoose = "Please choose between Rock [r], Paper [p] or Scissors [s]: "
+const val pleaseChoose = "Please choose between Rock [r], Paper [p] or Scissors [s]: "
 
 fun main() {
     do {
         print("Hello and welcome to the Game Rock-Paper-Scissors!\n")
-        print(pleaseChoose)
-        val choice = readLine()
-        val userChoice = mapResponse(choice)
-        val computerChoice = calcComputerResponse()
-        println("You have chosen: '${userChoice}'")
-        println("The computer has chosen: '${computerChoice}'")
-        println(calcWinner(userChoice, computerChoice))
-        println("Would you like to replay the game? Please choose [y] for Yes or any other character for No: ")
+        val userChoice = playerDraw()
+        val computerChoice = computerDraw()
+        println(calculateWinner(userChoice, computerChoice))
+        println("Would you like to replay the game? Please press [y] for Yes or any other key for No: ")
         val replay = readLine()
     } while (replay == "y")
 }
 
-// referee which calculates the winner
-fun calcWinner(userChoice: String, computerChoice: String): String {
+
+fun playerDraw(): String {
+    print(pleaseChoose)
+    val userCommand = readLine()
+    val userChoice = mapUserCommand(userCommand)
+    println("You have chosen: '${userChoice}'")
+
+    return userChoice
+}
+
+fun computerDraw(): String {
+    val possibleChoices = arrayOf("Rock", "Paper", "Scissors")
+    val computerChoice = possibleChoices.random()
+    println("The computer has chosen: '${computerChoice}'")
+
+    return computerChoice
+}
+
+fun calculateWinner(userChoice: String, computerChoice: String): String {
     val result = when (userChoice) {
         "rock" -> when (computerChoice) {
             "rock" -> "It's a tie"
@@ -42,23 +53,19 @@ fun calcWinner(userChoice: String, computerChoice: String): String {
         }
         else -> "It's unclear if '$userChoice' beats '$computerChoice', or not."
     }
+
     return result
 }
 
-// computer draws
-fun calcComputerResponse(): String {
-    val possibleChoices = arrayOf("Rock", "Paper", "Scissors")
-    return possibleChoices.random()
-}
-
-// map user shortcut choice to the nouns of the game
-fun mapResponse(choice: String?): String {
+// map user command  to the actual game nouns
+fun mapUserCommand(choice: String?): String {
     val response = when (choice) {
         "r" -> "Rock"
         "p" -> "Paper"
         "s" -> "Scissors"
         else -> "Invalid input! " + pleaseChoose
     }
+
     return response
 }
 
