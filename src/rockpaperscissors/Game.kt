@@ -4,16 +4,19 @@ import java.awt.Choice
 
 val pleaseChoose = "Please choose between Rock [r], Paper [p] or Scissors [s]: "
 
-// TODO: add a loop for when an invalid choice has been made
 fun main() {
-    print("Hello and welcome to the Game Rock-Paper-Scissors!\n")
-    print(pleaseChoose)
-    val choice = readLine()
-    val userChoice = mapResponse(choice)
-    val computerChoice = calcComputerResponse()
-    println("You have chosen: '${userChoice}'")
-    println("The computer has chosen: '${computerChoice}'")
-    println(calcWinner(userChoice, computerChoice))
+    do {
+        print("Hello and welcome to the Game Rock-Paper-Scissors!\n")
+        print(pleaseChoose)
+        val choice = readLine()
+        val userChoice = mapResponse(choice)
+        val computerChoice = calcComputerResponse()
+        println("You have chosen: '${userChoice}'")
+        println("The computer has chosen: '${computerChoice}'")
+        println(calcWinner(userChoice, computerChoice))
+        println("Would you like to replay the game? Please choose [y] for Yes or any other character for No: ")
+        val replay = readLine()
+    } while (replay == "y")
 }
 
 // referee which calculates the winner
