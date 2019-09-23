@@ -13,6 +13,7 @@
         <rest-assured.version>4.1.1</rest-assured.version>
         <hamcrest.version>2.2-rc1</hamcrest.version>
         <junit5.version>5.5.2</junit5.version>
+        <awaitility.version>4.0.1</awaitility.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility-kotlin</artifactId>
+            <version>${awaitility.version}</version>
             <scope>test</scope>
         </dependency>
 
